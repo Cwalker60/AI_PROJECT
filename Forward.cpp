@@ -1,7 +1,8 @@
-/*Enclosed a program, which comprises the inference engine based on Forward chaining.  You need it for your
-  project #1.  The program contains some errors and it is not designed to be efficient.
-  Modify the program to make it better and efficient.  Explain in your report how you have modified the
-/*program to make it better.
+/*  Enclosed a program, which comprises the inference engine based on Forward chaining.  You need it for your
+    project #1.  The program contains some errors and it is not designed to be efficient.
+    Modify the program to make it better and efficient.  Explain in your report how you have modified the
+    program to make it better.
+*/
 
 /*** FORWARD CHAINING ***/
 /************************/
@@ -15,11 +16,11 @@ S-1. Install your THEN clauses in sequence in the middle
 of the progrram within the second case statement. */
 
 #include <stdio.h>
-#include <string.h>
 #include <cstdlib>
-#include <cstdio>
-#include <iomanip>
-#include <iostream>
+#include <String.h> //strcpy
+#include <iostream>  //cout
+
+using namespace std;
 
 int flag;
 char cndvar[10][3];
@@ -35,9 +36,6 @@ int cn;  /* clause number */
 void search(void);
 void check_instantiation(void);
 void instantiate(void);
-void ifSwitch();
-void thenSwitch();
-void b496();
 
 main()
 {
@@ -50,14 +48,14 @@ main()
     for (i=1;i < 11; i++)
         strcpy(cndvar[i], "");
     for (i=1;i < 11; i++)
-        instlt[i] = 0;          //changed from strcpy(instlt[i] = "") to avoid int to char* conversion errors
+        instlt[i] = 0;
     for (i=1;i < 11; i++)
         strcpy(varlt[i], "");
     for (i=1;i < 11; i++)
     {
         strcpy(cndvar[i], "");
         strcpy(varlt[i], "");
-        instlt[i] = 0;          //changed from strcpy(instlt[i] = "") to avoid int to char* conversion errors
+        instlt[i] = 0;
     }
 
     /* enter variables which are in the IF part, 1 at a time in
@@ -74,8 +72,11 @@ main()
 
     printf("*** VARIABLE LIST ***\n");
     for (i=1;i < 11; i++)
-        printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);
+    {
+        printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);   //added brackets around for loop
+    }
     printf("HIT RETURN TO CONTINUE");
+
     getchar();
 
     /* enter variables as they appear in the IF clauses, Up to 3
@@ -97,6 +98,7 @@ main()
             k = 4 * (i - 1) + j;
             printf("VARIABLE %d  %s\n", j, clvarlt[k]);
         }
+
         if (i==4)
         {
             printf("HIT RETURN TO CONTINUE");
@@ -120,8 +122,157 @@ main()
     /* start at the beginning */
     f=1;
 
-    b496();
 
+//b496:
+
+    //outer loop to move fp < bp
+    do
+    {
+        //inner IF loop
+        do
+        {
+            search();
+            /* point to first clause in statement */
+            cn=1;
+            if (sn != 0)
+                /* more statements */
+            {
+                /* locate the clause */
+                i = 4 * (sn-1) + cn;
+                /* clause variable */
+                strcpy(v, clvarlt[i]);
+                /* are there any more clauses for this statement */
+                while (strcmp(v, ""))
+                    /* more clauses */
+                {
+                    /* check instantiation of this clause */
+                    check_instantiation();
+                    cn = cn+1;
+                    /* check next clause */
+                    i = 4 * (sn-1) + cn;
+                    strcpy(v, clvarlt[i]);
+                }
+
+                /* no more clauses - check IF part of statement */
+                s = 0;
+                /* sample IF-THEN statements from the position knowledge base */
+
+                switch(sn)
+                {
+                    /* statement 1 */
+                    /***** comment 1500 *****/
+                case 1: if (strcmp(interest, "FALL") == 0) s=1;
+                    break;
+                    /* statement 2 */
+                    /***** comment 1510 *****/
+                case 2: if (strcmp(interest, "RISE") == 0) s=1;
+                    break;
+                    /* statement 3 */
+                    /***** comment 1540 *****/
+                case 3: if (strcmp(dollar, "FALL") == 0) s=1;
+                    break;
+                    /* statement 4 */
+                    /***** comment 1550 *****/
+                case 4: if (strcmp(dollar, "RISE") == 0) s=1;
+                    break;
+                    /* statement 5 */
+                case 5: if ((strcmp(fedint, "FALL") == 0) &&
+                            (strcmp(fedmon, "ADD")) == 0) s=1;
+                    break;
+                    /* statement 6 */
+                case 6: if ((strcmp(qu, "YES") == 0) && (gr >= 3.5) == 0) s=1;
+                    break;
+                    /***** comment 1610 *****/
+                }
+
+                /* see if the THEN part should be inovked, i.e., s=1 */
+                //if (s != 1)
+                //{
+                //    f = sn + 1;
+                    //goto b496;
+                //}
+
+                f = sn+1;
+            }
+            //changed initial if/goto statement into a do while loop with the same check
+
+        } while (s != 1);
+
+    //this also requires a second IF to check to the same conditions for the THEN loop
+     if (sn != 0)
+     {
+
+            /* invoke THEN part */
+            switch (sn)
+            {
+                /*********** comment 1500 ***********/
+                /* put variable on the conclusion variable queue */
+            case 1:
+                strcpy(stock, "RISE");
+                printf("ST=RISE\n");
+                strcpy(v, "ST");
+                instantiate();
+                break;
+                /*********** comment 1510 ***********/
+                /* put variable on the conclusion variable queue */
+            case 2:
+                strcpy(stock, "FALL");
+                printf("ST=FALL\n");
+                strcpy(v, "ST");
+                instantiate();
+                break;
+                /*********** comment 1540 ***********/
+                /* put variable on the conclusion variable queue */
+            case 3:
+                strcpy(interest, "RISE");
+                printf("IN=RISE\n");
+                strcpy(v, "IN");
+                instantiate();
+                break;
+                /*********** comment 1550 ***********/
+                /* put variable on the conclusion variable queue */
+            case 4:
+                strcpy(interest, "FALL");
+                printf("IN=FALL\n");
+                strcpy(v, "IN");
+                instantiate();
+                break;
+                /* put variable on the conclusion variable queue */
+            case 5:
+                strcpy(interest, "FALL");
+                printf("IN=FALL\n");
+                strcpy(v, "IN");
+                instantiate();
+                break;
+            case 6:
+                strcpy(po, "YES");
+                printf("PO=YES\n");
+                break;
+                /*********** comment 1610 ***********/
+            }
+            f = sn + 1;
+            //goto b496;
+
+     }
+
+
+        /* no more clauses in the clause variable list (clvarlt)
+        containing the variable in front of the queue (cndvar(fp))
+        then remove front variable (cndvar(fp)) and replace it by
+        the next variable (cndvar(fp+1)). If no more variables are
+        at the front of the queue, stop. */
+        /* next queue variable */
+        fp = fp+1;
+        //if (fp < bp)
+        //{
+            /* check out the condition variable */
+        f = 1;
+            //goto b496;
+        //}
+        /* no more conclusion variables on queue */
+
+        //changed to outer while loop for entire main, instead of these 2 checks
+    }while (fp < bp);
 
 }
 
@@ -213,147 +364,11 @@ void instantiate()
     i = 1;
 
     /* determine if (v) is or already has been on the queue (cndvar) */
-    while ((strcmp(v, cndvar[i]) != 0) && (i <= 10))
-    i=i+1;
+    while ((strcmp(v, cndvar[i]) != 0) && (i <= 10)) i=i+1;
     /* variable has not been on the queue. Store it in the back of the queue */
     if (strcmp(v, cndvar[i]) != 0)
     {
         strcpy(cndvar[bp], v);
         bp=bp+1;
     }
-}
-
-void ifSwitch()
-{
-    switch(sn)
-        {
-            /* statement 1 */
-        case 1: if (strcmp(interest, "FALL") == 0) s=1;
-            break;
-            /* statement 2 */
-        case 2: if (strcmp(interest, "RISE") == 0) s=1;
-            break;
-            /* statement 3 */
-        case 3: if (strcmp(dollar, "FALL") == 0) s=1;
-            break;
-            /* statement 4 */
-        case 4: if (strcmp(dollar, "RISE") == 0) s=1;
-            break;
-            /* statement 5 */
-        case 5: if ((strcmp(fedint, "FALL") == 0) &&
-                    (strcmp(fedmon, "ADD")) == 0) s=1;
-            break;
-            /* statement 6 */
-        case 6: if ((strcmp(qu, "YES") == 0) && (gr >= 3.5) == 0) s=1;
-            break;
-        }
-}
-
-void thenSwitch()
-{
-    switch (sn)
-        {
-            /*********** comment 1500 ***********/
-            /* put variable on the conclusion variable queue */
-        case 1:
-            strcpy(stock, "RISE");
-            printf("ST=RISE\n");
-            strcpy(v, "ST");
-            instantiate();
-            break;
-            /*********** comment 1510 ***********/
-            /* put variable on the conclusion variable queue */
-        case 2:
-            strcpy(stock, "FALL");
-            printf("ST=FALL\n");
-            strcpy(v, "ST");
-            instantiate();
-            break;
-            /*********** comment 1540 ***********/
-            /* put variable on the conclusion variable queue */
-        case 3:
-            strcpy(interest, "RISE");
-            printf("IN=RISE\n");
-            strcpy(v, "IN");
-            instantiate();
-            break;
-            /*********** comment 1550 ***********/
-            /* put variable on the conclusion variable queue */
-        case 4:
-            strcpy(interest, "FALL");
-            printf("IN=FALL\n");
-            strcpy(v, "IN");
-            instantiate();
-            break;
-            /* put variable on the conclusion variable queue */
-        case 5:
-            strcpy(interest, "FALL");
-            printf("IN=FALL\n");
-            strcpy(v, "IN");
-            instantiate();
-            break;
-        case 6:
-            strcpy(po, "YES");
-            printf("PO=YES\n");
-            break;
-            /*********** comment 1610 ***********/
-        }
-}
-
-void b496()
-{
-    search();
-    /* point to first clause in statement */
-    cn=1;
-    if (sn != 0)
-        /* more statements */
-    {
-        /* locate the clause */
-        i = 4 * (sn-1) + cn;
-        /* clause variable */
-        strcpy(v, clvarlt[i]);
-        /* are there any more clauses for this statement */
-        while (strcmp(v, ""))
-            /* more clauses */
-        {
-            /* check instantiation of this clause */
-            check_instantiation();
-            cn = cn+1;
-            /* check next clause */
-            i = 4 * (sn-1) + cn;
-            strcpy(v, clvarlt[i]);
-        }
-
-        /* no more clauses - check IF part of statement */
-        s = 0;
-        /* sample IF-THEN statements from the position knowledge base */
-        ifSwitch();
-
-        /* see if the THEN part should be inovked, i.e., s=1 */
-        if (s != 1)
-        {
-            f = sn + 1;
-            b496();
-        }
-
-        /* invoke THEN part */
-        thenSwitch();
-        f = sn + 1;
-        b496();
-    }
-
-    /* no more clauses in the clause variable list (clvarlt)
-    containing the variable in front of the queue (cndvar(fp))
-    then remove front variable (cndvar(fp)) and replace it by
-    the next variable (cndvar(fp+1)). If no more variables are
-    at the front of the queue, stop. */
-    /* next queue variable */
-    fp=fp+1;
-    if (fp < bp)
-    {
-        /* check out the condition variable */
-        f = 1;
-        b496();
-    }
-    /* no more conclusion variables on queue */
 }

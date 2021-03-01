@@ -19,6 +19,7 @@ of the progrram within the second case statement. */
 #include <string.h> //strcpy
 #include <iostream>  //cout
 #include <vector>
+#include "Forward.h"
 
 using namespace std;
 
@@ -44,11 +45,16 @@ int  bp  /* back pointer */,  gr /* grade */,  sn; /* statement number */
 int cn;  /* clause number */
 bool complete = false;
 
+
 void search(void);
 void check_instantiation(void);
 void instantiate(void);
 
-int main()
+Forward::Forward() {
+
+}
+
+void Forward::run_forward()
 {
     /******** INITIALIZATION SECTION ***********/
     fp=1;
@@ -114,7 +120,7 @@ int main()
     //strcpy(clvarlt[13], "DO");
     //strcpy(clvarlt[17], "FT");
     //strcpy(clvarlt[18], "FM");
-
+    /*
     clvarlt[1] = "STA";
     clvarlt[2] = "HEA";
 
@@ -155,19 +161,82 @@ int main()
     clvarlt[42] = "LEU";
     clvarlt[43] = "CHEM";
     clvarlt[44] = "STEM";
+    */
+    // statement 1
+    clvarlt[1] = "STA";
+    // statement 2
+    clvarlt[7] = "STA";
+    // statement 3
+    clvarlt[13] = "STA";
+    clvarlt[14] = "HEA";
+    // statement 4
+    clvarlt[19] = "STA";
+    clvarlt[20] = "HEA";
+    // statement 5
+    clvarlt[25] = "STA";
+    clvarlt[26] = "HEA";
+    clvarlt[27] = "LEU";
+
+    // statement 6
+    clvarlt[31] = "STA";
+    clvarlt[32] = "HEA";
+    clvarlt[33] = "LEU";
+
+    // statement 7
+    clvarlt[37] = "STA";
+    clvarlt[38] = "HEA";
+    clvarlt[39] = "LEU";
+    clvarlt[40] = "RAD";
+
+    // statement 8
+    clvarlt[43] = "STA";
+    clvarlt[44] = "HEA";
+    clvarlt[45] = "LEU";
+    clvarlt[46] = "RAD";
+
+    // statement 9
+    clvarlt[49] = "STA";
+    clvarlt[50] = "HEA";
+    clvarlt[51] = "LEU";
+    clvarlt[52] = "RAD";
+    clvarlt[53] = "CHEM";
+
+    // statement 10
+    clvarlt[55] = "STA";
+    clvarlt[56] = "HEA";
+    clvarlt[57] = "LEU";
+    clvarlt[58] = "RAD";
+    clvarlt[59] = "CHEM";
+
+    // statement 11
+    clvarlt[61] = "STA";
+    clvarlt[62] = "HEA";
+    clvarlt[63] = "LEU";
+    clvarlt[64] = "RAD";
+    clvarlt[65] = "CHEM";
+    clvarlt[66] = "STEM";
+
+    // statement 12
+    clvarlt[67] = "STA";
+    clvarlt[68] = "HEA";
+    clvarlt[69] = "LEU";
+    clvarlt[70] = "RAD";
+    clvarlt[71] = "CHEM";
+    clvarlt[72] = "STEM";
+
 
     printf("*** CLAUSE-VARIABLE LIST ***\n");
-    for (i = 1; i < 9; i++)
+    for (i = 1; i < 13; i++)
     {
         printf("** CLAUSE %d\n", i);
-        for (j = 1; j < 5; j++)
+        for (j = 1; j < 7; j++)
         {
-            k = 4 * (i - 1) + j;
+            k = 6 * (i - 1) + j;
             //printf("VARIABLE %d  %s\n", j, clvarlt[k]);
             cout << "VARIABLE " << j << " " << clvarlt[k] << endl;
         }
 
-        if (i==4)
+        if (i==6)
         {
             printf("HIT RETURN TO CONTINUE");
             getchar();
@@ -201,15 +270,15 @@ int main()
     {
         //inner IF loop
             search();
-            cout << sn << " is the then/if at start" << endl;
+            //cout << sn << " is the then/if at start" << endl;
             /* point to first clause in statement */
             cn=1;
             if (sn != 0)
                 /* more statements */
             {
                 /* locate the clause */
-                i = 4 * (sn-1) + cn;
-                cout << "clause var at " << i << endl;
+                i = 6 * (sn-1) + cn;
+                //cout << "clause var at " << i << endl;
                 /* clause variable */
                 //strcpy(v, clvarlt[i]);
                 v = clvarlt[i];
@@ -222,7 +291,7 @@ int main()
                     check_instantiation();
                     cn = cn+1;
                     /* check next clause */
-                    i = 4 * (sn-1) + cn;
+                    i = 6 * (sn-1) + cn;
                     //strcpy(v, clvarlt[i]);
                     v = clvarlt[i];
                 }
@@ -288,28 +357,28 @@ int main()
                  */
 
                 //stage = 0 or stage = 1. 0 - surgery possible. 1 - no surgery possible
-                cout << "if and then statement is " << sn << endl;
+                //cout << "sn : " << sn << endl;
 
                 switch(sn){
                     case 1: if(stage <= 1) s=1;
                         break;
                     case 2: if(stage > 1) s=1;
                         break;
-                    case 3: if( health == "YES") s=1;
+                    case 3: if( health == "YES" && (stage == 0)) s=1;
                         break;
-                    case 4: if(health == "NO") s=1;
+                    case 4: if(health == "NO" && (stage == 0)) s=1;
                         break;
                     case 5: if(leukemia == "YES") s=1;
                         break;
                     case 6: if(leukemia == "NO") s=1;
                         break;
-                    case 7: if(chemo == "YES") s =1;
+                    case 7: if(radiation == "YES" && (leukemia == "NO")) s =1;
                         break;
-                    case 8: if(chemo == "NO") s =1;
+                    case 8: if(radiation == "NO") s =1;
                         break;
-                    case 9: if(radiation == "YES") s=1;
+                    case 9: if(chemo == "YES" && (leukemia == "NO")) s=1;
                         break;
-                    case 10: if(radiation == "NO") s=1;
+                    case 10: if(chemo == "NO") s=1;
                         break;
                     case 11: if(stem == "YES") s=1;
                         break;
@@ -317,7 +386,7 @@ int main()
                         break;
 
                 }
-                cout << "value of s : " << s << endl;
+                //cout << "value of s : " << s << endl;
                 /* see if the THEN part should be inovked, i.e., s=1 */
                 if (s != 1)
                 {
@@ -325,7 +394,7 @@ int main()
                     //goto b496;
                     continue;
                 }
-                f = sn+1;
+                //f = sn+1;
             }
             //changed initial if/goto statement into a do while loop with the same check
 
@@ -397,13 +466,13 @@ int main()
                 //stage = 0 or stage = 1. 0 - surgery possible. 1 - no surgery possible
                 switch(sn){
                     case 1:
-                        cout << "Stage = " << stage;
+                        cout << "Stage = " << stage << endl;
                         stage = 0;
                         v = "STA";
                         instantiate();
                         break;
                     case 2:
-                        cout << "Stage = " << stage;
+                        cout << "Stage = " << stage << endl;
                         stage = 1;
                         v = "STA";
                         instantiate();
@@ -411,14 +480,16 @@ int main()
                     case 3:
                         health = "YES";
                         v = "HEA";
-                        cout << "We recommend surgery.";
-                        //instantiate();
+                        complete = true;
+                        cout << "We recommend surgery." << endl;
+                        instantiate();
                         break;
                     case 4:
                         health = "NO";
                         v = "HEA";
-                        cout << "We recomend drug treatment";
-                        //instantiate();
+                        cout << "We recomend drug treatment" << endl;
+                        complete = true;
+                        instantiate();
                         break;
                     case 5:
                         leukemia = "YES";
@@ -431,34 +502,42 @@ int main()
                         instantiate();
                         break;
                     case 7:
-                        chemo = "YES";
-                        v = "CHEM";
+                        radiation = "YES";
+                        v = "RAD";
+                        cout << "We recommend radiation." << endl;
+                        complete = true;
                         instantiate();
                         break;
                     case 8:
-                        chemo = "NO";
-                        v = "CHEM";
+                        radiation = "NO";
+                        v = "RAD";
                         instantiate();
                         break;
                     case 9:
-                        radiation = "YES";
-                        v = "RAD";
+                        chemo = "YES";
+                        v = "CHEM";
+                        cout << "We recommend chemotherapy." << endl;
+                        complete = true;
                         instantiate();
                         break;
                     case 10:
-                        radiation = "NO";
-                        v = "RAD";
+                        chemo = "NO";
+                        v = "CHEM";
                         instantiate();
                         break;
                     case 11:
                         stem = "YES";
                         v = "STEM";
-                        cout << "We reccomend stem cell treatment.";
+                        cout << "We recommend stem cell treatment." << endl;
+                        complete = true;
+                        instantiate();
                         break;
                     case 12:
                         stem = "NO";
                         v = "STEM";
-                        cout << "We reccoment drug treatment.";
+                        cout << "We recommend drug treatment." << endl;
+                        complete = true;
+                        instantiate();
                         break;
                 }
 
@@ -476,7 +555,7 @@ int main()
         at the front of the queue, stop. */
         /* next queue variable */
         fp = fp+1;
-        cout << "fp : " << fp;
+        //cout << "fp : " << fp;
         if (fp < bp)
         {
             /* check out the condition variable */
@@ -488,7 +567,6 @@ int main()
         //changed to outer while loop for entire main, instead of these 2 checks
     }while (complete == false);
 
-    return 0;
 
 }
 
@@ -496,7 +574,7 @@ int main()
 /* Routine to instantiate a variable (v) if it isn't already.
 The instantiate indication (instlt) is a 0 if not, a 1 if it is.
 The vriable list (varlt) contains the variable (v) */
-void check_instantiation()
+void Forward::check_instantiation()
 {
     i=1;
 
@@ -553,15 +631,15 @@ void check_instantiation()
 one in front of the conclusion queue (cndvar). Return the statement
 number (sn). If there is no match, i.e., sn=0, the first statement
 for the space is f. */
-void search()
+void Forward::search()
 {
     flag = 0;
     sn = f;
 
-    while ((flag == 0) && (sn <= 10))
+    while ((flag == 0) && (sn <= 12))
     {
         cn=1;
-        k = (sn-1)*4+cn;
+        k = (sn-1)*6+cn;
         //while ((strcmp(clvarlt[k], cndvar[fp]) != 0) && (cn < 4))
         while((clvarlt[k] != cndvar[fp]) && (cn < 4))
         {
@@ -579,7 +657,7 @@ void search()
 //==========================================================================
 /* Routine to instantiate a varialbe (v) and then place it on the
 back of the queu (cndvar[bp]), if it is not already there. */
-void instantiate()
+void Forward::instantiate()
 {
     i=1;
     /* find varialbe in the varialbe list (varlt) */

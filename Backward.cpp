@@ -1,10 +1,9 @@
 #include <string.h>
 #include <cstdlib>
 #include <cstdio>
-#include <iomanip>
 #include <vector>
-#include <stack>
 #include <iostream>
+#include <fstream>
 #include "Backward.h"
 
 using namespace std;
@@ -62,25 +61,24 @@ vector<int> statsk(1);
 vector<int> clausk(1);
 
 int statenum, bf, bi, bj, bs, bk, /*stack pointer */ bsp;
-
+ofstream out_file;
 bool recursion;
 
 void determine_member_concl_list(void);
 void push_on_stack(void);
 void instantiate(void);
-void b520(void);
-void b545(void);
 void ifSwitch();
 void thenSwitch(void);
 
 Backward::Backward() {
 
 }
-
 void Backward::run_backward()
 {
         /***** initialization section ******/
         /* stack space is 10 we initially place stack space at 10+1 */
+        out_file.open("backward_log.txt");
+
         bsp=11;
         for (int i=1; i<11; i++)
         {
@@ -123,21 +121,24 @@ void Backward::run_backward()
         conclt.push_back("");
         */
 
-        cout << ("*** CONCLUSION LIST ***\n");
+        //cout << ("*** CONCLUSION LIST ***\n");
+        out_file << "*** CONCLUSION LIST ***\n";
         for (int i=1; i<conclt.size(); i++)
         {
-            cout << "CONCLUSION";
-            cout << conclt[i] << endl;
+            //cout << "CONCLUSION #" << i << " ";
+            //cout << conclt[i] << endl;
+            out_file << "CONCLUSION #" << i << " " << conclt[i] << "\n";
         }
 
 
-        cout << ("HIT RETURN TO CONTINUE");
-        gets(buff);
+        //cout << ("HIT RETURN TO CONTINUE");
+        //gets(buff);
         /* enter variables which are in the if part, 1 at a time in the
         exact order that they occur, up to 3 variables per if statement.  do not
         duplicate any variable names.  any name is used only once.  if no
         more variables left just hit return key. */
-        printf("*** VARIABLE LIST *\n");
+        //printf("*** VARIABLE LIST *\n");
+        out_file << "*** VARIABLE LIST *\n";
         /**** comment 367 *****/
         /*OLD
         strcpy(bvarlt[1], "DE");
@@ -152,13 +153,14 @@ void Backward::run_backward()
         //*/
 
         for(int i=1; i<bvarlt.size(); i++) { // OLD printf("VARIABLE %d %s\n", i, bvarlt[i]);
-         cout << "VARIABLE " << i << "\t" << bvarlt[i] << "\n";
+         //cout << "VARIABLE " << i << "\t" << bvarlt[i] << "\n";
+         out_file << "VARIABLE " << i << "\t" << bvarlt[i] << "\n";
         }
-        printf("HIT RETURN KEY TO CONTINUE");
-        gets(buff);
+        //printf("HIT RETURN KEY TO CONTINUE");
+        //gets(buff);
         /* enter variables as they appear in the if clauses.  a maximum
         of 3 variables per if statement.  if no more variables hit return key. */
-        printf("*** CLAUSE VARIABLE LIST ***\n");
+        //printf("*** CLAUSE VARIABLE LIST ***\n");
         /***** comment 407 through 409 ***/
         /* OLD
         strcpy(clbvarlt[1], "DE");
@@ -201,15 +203,17 @@ void Backward::run_backward()
         }
         */
         ///*
-        cout << "** CLAUSE VARIABLES ** \n";
+        //cout << "** CLAUSE VARIABLES ** \n";
+        out_file << "** CLAUSE VARIABLES ** \n";
         for (int i = 1; i < clbvarlt.size(); i++) {
-            cout << "VARIABLE " << i << "\t " <<  clbvarlt[i] << "\n";
+            //cout << "VARIABLE " << i << "\t " <<  clbvarlt[i] << "\n";
+            out_file << "VARIABLE"  << i << "\t " <<  clbvarlt[i] << "\n";
         }
         //*/
 
         /****** inference section *****/
-        printf("** ENTER CONCLUSION ? "); // OLD gets(varble);
-        cin >> varble;
+        varble = "cancer";
+        cout << "Input information regarding the patient's symptoms below.\n";
         /* get conclusion statement number (statenum) from the conclusion list
            (conclt) */
         /* first statement starts search */
@@ -217,7 +221,9 @@ void Backward::run_backward()
         bf=1;
         determine_member_concl_list();
         recursion = false;
+        out_file << "\nBEGIN BACKWARD PROGRAM\n";
         recursive_search();
+        out_file.close();
 
 
 }
@@ -496,7 +502,9 @@ void Backward::instantiate()
 instantiate indication (instlt) is a 0 if not, a 1 if it is.  the
 variable list (bvarlt) contains the variable (varble). */
 {
+
         bi=1;
+
         /* find variable in the list */
         //OLD while((strcmp(varble, bvarlt[i]) != 0) && (i<10)) i=i+1;
         while ((varble != bvarlt[bi]) && (bi < bvarlt.size())) {
@@ -534,70 +542,112 @@ variable list (bvarlt) contains the variable (varble). */
                 ///*
                 case 1: printf("Does your skin have abnormal issues? (YES/NO) ");
                         cin >> skin_issuse;
+                        out_file << "Does your skin have abnormal issues? (YES/NO) : "
+                                    << skin_issuse << endl;
                         break;
 
                 case 2: printf("Do you feel like your skin has changed? (YES/NO) ");
                         cin >> change_skin;
+                        out_file << "Do you feel like your skin has changed? (YES/NO) : "
+                                    << change_skin << endl;
                         break;
                 case 3: printf("Do you have dry skin? (YES/NO) ");
                         cin >> dry_skin;
+                        out_file << "Do you have dry skin? (YES/NO) : "
+                                    << dry_skin << endl;
                         break;
                 case 4: printf("Do you feel a lump in your breast? (YES/NO) ");
                         cin >>  lump_breast;
+                        out_file << "Do you feel a lump in your breast? (YES/NO) : "
+                                    << lump_breast << endl;
                         break;
                 case 5: printf("Do you feel like your moles have gotten worse? (YES/NO) ");
                         cin >>  mole_change;
+                        out_file << "Do you feel like your moles have gotten worse? (YES/NO) : "
+                                    << mole_change << endl;
                         break;
                 case 6: printf("Are you coughing persistently? (YES/NO) ");
                         cin >> persistant_cough;
+                        out_file << "Are you coughing persistently? (YES/NO) : "
+                                    << persistant_cough << endl;
                         break;
                 case 7: printf("Were you diagnosed with a respiratory infection? (YES/NO) ");
                         cin >> resp_infect;
+                        out_file << "Were you diagnosed with a respiratory infection? (YES/NO) : "
+                                    << resp_infect << endl;
                         break;
                 case 8: printf("Do you cough up blood? (YES/NO) ");
                         cin >>  cough_blood;
+                        out_file << "Do you cough up blood? (YES/NO) : "
+                                    << cough_blood << endl;
                         break;
                 case 9: printf("Do you feel like you have difficulty swallowing? (YES/NO) ");
                         cin >>  diff_swallow;
+                        out_file << "Do you feel like you have difficulty swallowing? (YES/NO) : "
+                                    << diff_swallow << endl;
                         break;
 
                 case 10: printf("Have you experienced sudden weight loss? (YES/NO) ");
                         cin >> weight_loss;
+                        out_file << "Have you experienced sudden weight loss? (YES/NO) : "
+                                    << weight_loss << endl;
                         break;
                 case 11: printf("Do you have any swollen lymph nodes? (YES/NO) ");
                         cin >> swol_lymph;
+                        out_file << "Do you have any swollen lymph nodes? (YES/NO) : "
+                                    << swol_lymph << endl;
                         break;
                 case 12: printf("Do experience pain deep within your bones? (YES/NO) ");
                         cin >>  bone_pain;
+                        out_file << "Do experience pain deep within your bones? (YES/NO) : "
+                                    << bone_pain << endl;
                         break;
                 case 13: printf("Do you have rectal bleeding or blood after bowel movements? (YES/NO) ");
                         cin >>  rectal_bleed;
+                        out_file << "Do you have rectal bleeding or blood after bowel movements? (YES/NO) : "
+                                    << rectal_bleed << endl;
                         break;
 
                 case 14: printf("Do you have severe or moderate mouth ulcers? (YES/NO) ");
                         cin >> mouth_ulcer;
+                        out_file << "Do you have severe or moderate mouth ulcers? (YES/NO) : "
+                                    << mouth_ulcer << endl;
                         break;
                 case 15: printf("Do you experience frequent abdominal pain? (YES/NO) ");
                         cin >> abdominal_pain;
+                        out_file << "Do you experience frequent abdominal pain? (YES/NO) : "
+                                    << abdominal_pain << endl;
                         break;
                 case 16: printf("Do experience frequent nausea? (YES/NO) ");
                         cin >>  nausea;
+                        out_file << "Do experience frequent nausea? (YES/NO) : "
+                                    << nausea << endl;
                         break;
                 case 17: printf("Do you experience headaches? (YES/NO) ");
                         cin >>  headache;
+                        out_file << "Do you experience headaches? (YES/NO) : "
+                                    << headache << endl;
                         break;
 
                 case 18: printf("Has your skin changed to a yellow? (YES/NO) ");
                         cin >> yellow_skin;
+                        out_file << "Has your skin changed to a yellow? (YES/NO) : "
+                                    << yellow_skin << endl;
                         break;
                 case 19: printf("Do you experience problems urinating? (YES/NO) ");
                         cin >> trouble_urine;
+                        out_file << "Do you experience problems urinating? (YES/NO) : "
+                                    << trouble_urine << endl;
                         break;
                 case 20: printf("Do have blood in your urine? (YES/NO) ");
                         cin >>  blood_urine;
+                        out_file << "Do have blood in your urine? (YES/NO) : "
+                                    << blood_urine << endl;
                         break;
                 case 21: printf("Do you experience lower back pain? (YES/NO) ");
                         cin >>  lower_back_pain;
+                        out_file << "Do you experience lower back pain? (YES/NO) "
+                                    << lower_back_pain << endl;
                         break;
                         //*/
 
@@ -631,7 +681,6 @@ void Backward::ifSwitch()
         // RULE 10
         case 1: if((skin_issuse == "YES") && (lump_breast == "YES") /*&& (mole_change == "NO")*/ ) {
             bs = 1;
-            cout << "RULE 10 ENACT\n";
         }
                 break;
         // RULE 30
@@ -653,7 +702,6 @@ void Backward::ifSwitch()
         case 5: if((skin_issuse == "NO") && (persistant_cough == "YES") && (resp_infect == "YES") &&
                     (cough_blood == "YES")) {
                 bs = 1;
-                cout << " rule 5";
                 }
                 break;
         // RULE 100
@@ -833,107 +881,133 @@ void Backward::thenSwitch()
         ///*
         // RULE 10 THEN
         case 1: cancer = "Breast Cancer";
-                printf("Breast Cancer");
+                printf("Patient is diagnosed with Breast Cancer.\n");
+                out_file << "Patient is diagnosed with Breast Cancer.\n";
                 break;
         // RULE 30 THEN
         case 2: cancer = "Skin Cancer";
-                printf("Skin Cancer");
+                printf("Patient is diagnosed with Skin Cancer.\n");
+                out_file << "Patient is diagnosed with Skin Cancer.\n";
                 break;
         // RULE 50 THEN
         case 3: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 70 THEN
         case 4: cancer = "Lung Cancer";
-                printf("Lung Cancer n");
+                printf("Patient is diagnosed with Lung Cancer.\n");
+                out_file << "Patient is diagnosed with Lung Cancer.\n";
                 break;
         // RULE 80 THEN
         case 5: cancer = "Tracheal Cancer";
-                printf("Tracheal Cancer");
+                printf("Patient is diagnosed with Tracheal Cancer.\n");
+                out_file << "Patient is diagnosed with Tracheal Cancer.\n";
                 break;
         // RULE 100
         case 6: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 120 THEN
         case 7: cancer = "Mouth Cancer";
-                printf("Mouth Cancer");
+                printf("Patient is diagnosed with Mouth Cancer.\n");
+                out_file << "Patient is diagnosed with Mouth Cancer.\n";
                 break;
         // RULE 140 THEN
         case 8: cancer = "Leukemia";
-                printf("Leukemia");
+                printf("Patient is diagnosed with Leukemia.\n");
+                out_file << "Patient is diagnosed with Leukemia.\n";
                 break;
         // RULE 160 THEN
         case 9: cancer = "Mouth Cancer";
-                printf("Mouth Cancer");
+                printf("Patient is diagnosed with Mouth Cancer.\n");
+                out_file << "Patient is diagnosed with Mouth Cancer.\n";
                 break;
         // RULE 180 THEN
         case 10: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 200 THEN
         case 11: cancer = "Colon Cancer";
-                printf("Colon Cancer");
+                printf("Patient is diagnosed with Colon Cancer.\n");
+                out_file << "Patient is diagnosed with Colon Cancer.\n";
                 break;
         // RULE 220
         case 12: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 240
         case 13: cancer = "Bone Cancer";
-                printf("Bone Cancer");
+                printf("Patient is diagnosed with Bone Cancer.\n");
+                out_file << "Patient is diagnosed with Bone Cancer.\n";
                 break;
         // RULE 260 THEN
         case 14: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 280 THEN
         case 15: cancer = "Kidney Cancer";
-                printf("Kidney Cancer");
+                printf("Patient is diagnosed with Kidney Cancer.\n");
+                out_file << "Patient is diagnosed with Kidney Cancer.\n";
                 break;
         // RULE 310 THEN
         case 16: cancer = "Bladder Cancer";
-                printf("Bladder Cancer n");
+                printf("Patient is diagnosed with Bladder Cancer.\n");
+                out_file << "Patient is diagnosed with Bladder Cancer.\n";
                 break;
         // RULE 340 THEN
         case 17: cancer = "Mouth Cancer";
-                printf("Mouth Cancer");
+                printf("Patient is diagnosed with Mouth Cancer.\n");
+                out_file << "Patient is diagnosed with Mouth Cancer.\n";
                 break;
         // RULE 360
         case 18: cancer = "Colon Cancer";
-                printf("Colon Cancer");
+                printf("Patient is diagnosed with Colon Cancer.\n");
+                out_file << "Patient is diagnosed with Colon Cancer.\n";
                 break;
         // RULE 380 THEN
         case 19: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 400 THEN
         case 20: cancer = "Bone Cancer";
-                printf("Bone Cancer");
+                printf("Patient is diagnosed with Bone Cancer.\n");
+                out_file << "Patient is diagnosed with Bone Cancer.\n";
                 break;
         // RULE 430 THEN
         case 21: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         // RULE 450 THEN
         case 22: cancer = "Kidney Cancer";
-                printf("Kidney Cancer");
+                printf("Patient is diagnosed with Kidney Cancer.\n");
+                out_file << "Patient is diagnosed with Kidney Cancer.\n";
                 break;
         // RULE 480 THEN
         case 23: cancer = "Bladder Cancer";
-                printf("Bladder Cancer");
+                printf("Patient is diagnosed with Bladder Cancer.\n");
+                out_file << "Patient is diagnosed with Bladder Cancer.\n";
                 break;
         // RULE 510
         case 24: cancer = "Brain Cancer";
-                printf("Brain Cancer");
+                printf("Patient is diagnosed with Brain Cancer.\n");
+                out_file << "Patient is diagnosed with Brain Cancer.\n";
                 break;
         // RULE 530
         case 25: cancer = "Liver Cancer";
-                printf("Liver Cancer");
+                printf("Patient is diagnosed with Liver Cancer.\n");
+                out_file << "Patient is diagnosed with Liver Cancer.\n";
                 break;
         // RULE 550
         case 26: cancer = "None diagnosed";
-                printf("See doctor for further symptoms.");
+                printf("Patient is diagnosed with no Cancer.\n");
+                out_file << "Patient is diagnosed with no Cancer.\n";
                 break;
         //*/
 
@@ -944,14 +1018,14 @@ void Backward::recursive_search() {
         if (statenum != 0) {
              do {
                 if (recursion == false) {
-                    push_on_stack(); cout << "push\n";
+                    push_on_stack();
                 }
                     recursion = false;
                     breaks = false;
                 do {
                     // Loop through to get all conclusions on stack.
                         bi= (statsk[bsp] -1) *8 + clausk[bsp];
-                        cout << "statsk i = " << bi << "\n";
+                        //cout << "statsk i = " << bi << "\n";
                         /* clause variable */
                         varble = clbvarlt[bi];
                         if(varble != "") {
@@ -965,7 +1039,6 @@ void Backward::recursive_search() {
                                 breaks = true;
                                 //push_on_stack();
                                 printStack();
-                                cout << "continue";
                                 break;
                             }
                             instantiate();
@@ -974,14 +1047,12 @@ void Backward::recursive_search() {
 
                 } while (varble != "");
                 if (breaks == true) {
-                    cout << "goto\n";
                     continue;
                 }
                 statenum = statsk[bsp];
-                cout << "statenum is now " << statenum << "\n";
                 bs = 0;
                 ifSwitch();
-                 cout << bs << " is s after if.\n";
+                 //cout << bs << " is s after if.\n";
                 if( bs != 1) {
                     /* failed..search rest of statements for
                         same conclusion */
@@ -995,16 +1066,19 @@ void Backward::recursive_search() {
                    determine_member_concl_list();
                    bsp = bsp+1;
                   }
-                  cout << statenum << " state at end." << endl;
 
             } while ((bs != 1) && (statenum !=0));
 
             //if (statenum != 0) {
-                cout << "statenum after while is " << statenum << "\n";
+                //cout << "statenum after while is " << statenum << "\n";
                 thenSwitch();
                 bsp = bsp + 1;
                 if ((bsp >= 11)) {
-                    printf("*** SUCCESS\n");
+                    //printf("*** SUCCESS\n");
+                    if (cancer == "") {
+                        cout << "Unable to diagnose.\n";
+                        out_file << "Unable to diagnose.\n";
+                    }
 
                 } else {
                     clausk[bsp] = clausk[bsp]+1;

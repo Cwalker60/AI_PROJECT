@@ -1,5 +1,5 @@
 /*---------------------------------------------------
-    Program written by Charles Walker, Dakota Ruhl, and Kalin Ybarra
+    Program written by Charles Walker, Dakota Ruhl, and Kalin Ybarra.
 
 */
 
@@ -9,40 +9,44 @@
 #include <string.h>
 #include <vector>
 #include "Forward.h"
-#include "NewBackward.h"
+#include "Backward.h"
 
 using namespace std;
 // Forward Chaining
 void treatment() {
-    // Initialization
-    // Variable List Initialization
-    list<string> varlist;
+    Forward f;
+    f.run_forward(); // Run forward treatment
 
 
 }
 
 // Backward chaining
 void diagnosis() {
-    // Initialization
+    Backward b;
 
-    list<string> varlist;
-    list<string> conclusionlist;
-
-    // Variable List Initialization
-
-
-    // Inserting conclusion variables.
-
-
+    b.run_backward();
 
 }
 
 int main(int argc, const char* argv[]) {
-    NewBackward b;
-    Forward f;
+    string s; // Buffer string for inputs;
 
-    b.run_backward(); // Run backward diagnosis
-    f.run_forward(); // Run forward treatment
+    diagnosis();
+    cout << "Enter YES to continue to treatment, or NO to close the program." << endl;
+
+    do  {
+        cin >> s;
+        if (s != "YES") {
+            if (s != "NO") {
+             cout << "ERROR: Enter only YES or NO\n";
+            }
+        }
+    } while ((s != "YES") && (s != "NO")); // input verification
+    cout << "\n";
+
+    if (s == "YES") {
+        treatment();
+    }
 
     return 0;
 }

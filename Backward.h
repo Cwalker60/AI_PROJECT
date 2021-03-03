@@ -8,7 +8,7 @@ using namespace std;
 class Backward{
 public:
     void run_backward();
-    NewBackward();
+    Backward();
 private:
 
     void init(void);
@@ -19,6 +19,7 @@ private:
     void thenSwitch(void);
     void recursive_search(void);
     void printStack(void);
+    void log_data(void);
 };
 
 #endif

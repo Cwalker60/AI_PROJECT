@@ -19,6 +19,7 @@ of the progrram within the second case statement. */
 #include <string.h> //strcpy
 #include <iostream>  //cout
 #include <vector>
+#include <fstream>
 #include "Forward.h"
 
 using namespace std;
@@ -44,6 +45,7 @@ int f, i, j, k, s, fp   /* front pointer */;
 int  bp  /* back pointer */,  gr /* grade */,  sn; /* statement number */
 int cn;  /* clause number */
 bool complete = false;
+ofstream output_file;
 
 
 void search(void);
@@ -56,6 +58,8 @@ Forward::Forward() {
 
 void Forward::run_forward()
 {
+    output_file.open("forward_log.txt");
+
     /******** INITIALIZATION SECTION ***********/
     fp=1;
     bp=1;
@@ -100,15 +104,18 @@ void Forward::run_forward()
     varlt[5] = "CHEM"; // Chemo
     varlt[6] = "STEM"; // Stem cells
 
-    printf("*** VARIABLE LIST ***\n");
+    //printf("*** VARIABLE LIST ***\n");
+    output_file << "*** VARIABLE LIST ***\n";
     for (i=1;i < 11; i++)
     {
         //printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);   //added brackets around for loop
-        cout << "ENTER VARIABLE " << i << " " << varlt[i] << endl;
+       // cout << "VARIABLE " << i << " " << varlt[i] << endl;
+        output_file << "VARIABLE " << i << " " << varlt[i] << endl;
     }
-    printf("HIT RETURN TO CONTINUE");
+    //printf("HIT RETURN TO CONTINUE");
+    output_file << "\nClause Variable List\n";
 
-    getchar();
+    //getchar();
 
     /* enter variables as they appear in the IF clauses, Up to 3
     variables per IF statement. If no more variables left, just
@@ -224,30 +231,36 @@ void Forward::run_forward()
     clvarlt[71] = "CHEM";
     clvarlt[72] = "STEM";
 
-
-    printf("*** CLAUSE-VARIABLE LIST ***\n");
+    output_file << "\n";
+    //printf("*** CLAUSE-VARIABLE LIST ***\n");
     for (i = 1; i < 13; i++)
     {
-        printf("** CLAUSE %d\n", i);
+        //printf("** CLAUSE %d\n", i);
+        output_file << "** CLAUSE " << i << "\n";
         for (j = 1; j < 7; j++)
         {
             k = 6 * (i - 1) + j;
             //printf("VARIABLE %d  %s\n", j, clvarlt[k]);
-            cout << "VARIABLE " << j << " " << clvarlt[k] << endl;
+            //cout << "VARIABLE " << j << " " << clvarlt[k] << endl;
+            output_file << "VARIABLE " << j << " " << clvarlt[k] << endl;
         }
 
         if (i==6)
         {
-            printf("HIT RETURN TO CONTINUE");
-            getchar();
+            //printf("HIT RETURN TO CONTINUE");
+            //getchar();
         }
     }
 
-    /****** INFERENCE SECTION *****************/
-    printf("ENTER CONDITION VARIABLE? ");
-    //gets(c);
-    getline(cin, c);
+    output_file << "\nBEGIN PROGRAM LOG\n";
 
+    /****** INFERENCE SECTION *****************/
+    //printf("ENTER CONDITION VARIABLE? ");
+    //gets(c);
+    //getline(cin, c);
+
+    c = "STA"; //Set condition variable.
+    cout << "Input information regarding the patient's treatment options below.\n";
     /* place condition variable c on condition var queue cndvar */
     //strcpy(cndvar[bp], c);
     cndvar[bp] = c;
@@ -466,13 +479,15 @@ void Forward::run_forward()
                 //stage = 0 or stage = 1. 0 - surgery possible. 1 - no surgery possible
                 switch(sn){
                     case 1:
-                        cout << "Stage = " << stage << endl;
+                        //cout << "Stage = " << stage << endl;
+                        output_file << "Stage = " << stage << endl;
                         stage = 0;
                         v = "STA";
                         instantiate();
                         break;
                     case 2:
-                        cout << "Stage = " << stage << endl;
+                        //cout << "Stage = " << stage << endl;
+                        output_file << "Stage = " << stage << endl;
                         stage = 1;
                         v = "STA";
                         instantiate();
@@ -482,12 +497,14 @@ void Forward::run_forward()
                         v = "HEA";
                         complete = true;
                         cout << "We recommend surgery." << endl;
+                        output_file << "We recommend surgery." << endl;
                         instantiate();
                         break;
                     case 4:
                         health = "NO";
                         v = "HEA";
                         cout << "We recomend drug treatment" << endl;
+                        output_file << "We recomend drug treatment" << endl;
                         complete = true;
                         instantiate();
                         break;
@@ -505,6 +522,7 @@ void Forward::run_forward()
                         radiation = "YES";
                         v = "RAD";
                         cout << "We recommend radiation." << endl;
+                        output_file << "We recommend radiation." << endl;
                         complete = true;
                         instantiate();
                         break;
@@ -517,6 +535,7 @@ void Forward::run_forward()
                         chemo = "YES";
                         v = "CHEM";
                         cout << "We recommend chemotherapy." << endl;
+                        output_file << "We recommend chemotherapy." << endl;
                         complete = true;
                         instantiate();
                         break;
@@ -529,6 +548,7 @@ void Forward::run_forward()
                         stem = "YES";
                         v = "STEM";
                         cout << "We recommend stem cell treatment." << endl;
+                        output_file << "We recommend stem cell treatment." << endl;
                         complete = true;
                         instantiate();
                         break;
@@ -536,6 +556,7 @@ void Forward::run_forward()
                         stem = "NO";
                         v = "STEM";
                         cout << "We recommend drug treatment." << endl;
+                        output_file << "We recommend stem cell treatment." << endl;
                         complete = true;
                         instantiate();
                         break;
@@ -566,7 +587,7 @@ void Forward::run_forward()
         complete = true;
         //changed to outer while loop for entire main, instead of these 2 checks
     }while (complete == false);
-
+    output_file.close();
 
 }
 
@@ -577,7 +598,6 @@ The vriable list (varlt) contains the variable (v) */
 void Forward::check_instantiation()
 {
     i=1;
-
     /* find variable in the variable list */
    // while ((strcmp(v, varlt[i]) != 0) && (i <= 10)) i = i+1;
     while( (v != varlt[i]) && i<varlt.size()) i = i+1;
@@ -597,29 +617,35 @@ void Forward::check_instantiation()
             printf("What stage is the cancer? ");
             //gets(dollar);
                 cin >> stage;
+                output_file << "What stage is the cancer? : " << stage << endl;
             break;
         case 2:
-            printf("Are you healthy enough  for surgery?");
+            printf("Are you healthy enough for surgery?");
             //gets(fedint);
                 cin >> health;
+                output_file << "Are you healthy enough for surgery? : " << health << endl;
             break;
         case 3:
             printf("Is the cancer Leukemia? ");
             //gets(fedmon);
                 cin >> leukemia;
+                output_file << "Is the cancer Leukemia? : " << leukemia << endl;
                 break;
         case 4:
             printf("Can you do radiation? ");
             //gets(interest);
                 cin >> radiation;
+                output_file << "Can you do radiation? : " << radiation << endl;
             break;
         case 5:
             printf("Can you do chemo? ");
             //gets(stock);
                 cin >> chemo;
+                output_file << "Can you do chemo? : " << chemo << endl;
             break;
             case 6: printf("Can you do stem cell treatment? " );
                 cin >> stem;
+                output_file << "Can you do stem cell treatment? : " << stem << endl;
                 break;
         }
     }

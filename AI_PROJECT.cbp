@@ -32,8 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="NewBackward.cpp" />
-		<Unit filename="NewBackward.h" />
+		<Unit filename="Backward.cpp" />
+		<Unit filename="Backward.h" />
+		<Unit filename="Forward.cpp" />
+		<Unit filename="Forward.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

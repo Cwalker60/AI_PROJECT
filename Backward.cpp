@@ -467,7 +467,7 @@ void Backward::determine_member_concl_list() {
         /* member of conclusion list to be searched is f */
         bi = bf;
         // OLD while((strcmp(varble, conclt[i]) != 0) && (i<8))
-        while ((varble != conclt[bi]) && (bi < conclt.size())) {
+        while ((varble != conclt[bi]) && (bi < (conclt.size() - 1 ))) {
             bi = bi + 1;
             //cout << "Comparing " << varble << ": " << conclt[i] << "\n";
         }
@@ -1038,7 +1038,7 @@ void Backward::recursive_search() {
                                 determine_member_concl_list();
                                 breaks = true;
                                 //push_on_stack();
-                                printStack();
+                                //printStack();
                                 break;
                             }
                             instantiate();

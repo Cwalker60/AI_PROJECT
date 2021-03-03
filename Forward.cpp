@@ -600,7 +600,7 @@ void Forward::check_instantiation()
     i=1;
     /* find variable in the variable list */
    // while ((strcmp(v, varlt[i]) != 0) && (i <= 10)) i = i+1;
-    while( (v != varlt[i]) && i<varlt.size()) i = i+1;
+    while( (v != varlt[i]) && i<varlt.size() -1) i = i+1;
     /* check if already instantiated */
     if (instlt[i] != 1)
     {

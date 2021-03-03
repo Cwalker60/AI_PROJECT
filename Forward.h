@@ -8,7 +8,6 @@ class Forward {
 public:
     Forward();
     void run_forward();
-    NewForward();
 private:
     void check_instantiation(void);
     void search(void);

@@ -48,7 +48,7 @@ string cancer, skin_issuse, change_skin, dry_skin,
        nausea, headache, yellow_skin, trouble_urine,
        blood_urine, lower_back_pain;
 
-char buff[128];
+//char buff[128];
 
 /* instantiated list */
 //int instlt[11];
@@ -224,6 +224,14 @@ void Backward::run_backward()
         out_file << "\nBEGIN BACKWARD PROGRAM\n";
         recursive_search();
         out_file.close();
+
+	conclt.clear();
+	bvarlt.clear();
+	clbvarlt.clear();
+	binstlt.clear();
+	statsk.clear();
+	clausk.clear();
+	//delete buff;
 
 
 }

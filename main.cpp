@@ -17,7 +17,6 @@ void treatment() {
     Forward f;
     f.run_forward(); // Run forward treatment
 
-
 }
 
 // Backward chaining
@@ -25,7 +24,6 @@ void diagnosis() {
     Backward b;
 
     b.run_backward();
-
 }
 
 int main(int argc, const char* argv[]) {

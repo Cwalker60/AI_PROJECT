@@ -26,10 +26,10 @@ using namespace std;
 
 int flag;
 //char cndvar[10][3];
-vector<string> cndvar(10);
+vector<string> cndvar(13);
 //char varlt[10][3], /* variable list*/ clvarlt[40][3]; /* clause var list */
-vector<string> varlt(10);
-vector<string> clvarlt(50);
+vector<string> varlt(13);
+vector<string> clvarlt(72);
 
 //char c[3], vp[3], /* condition variable */  v[3]; /*variable */
 string c, vp, v;
@@ -38,9 +38,8 @@ string c, vp, v;
 int stage;
 string health, leukemia, radiation, chemo, stem;
 //char po[10], /* position */  qu[10]; /* qualify */
-string po, qu;
 //int instlt[10];         /* instantiated list*/
-vector<int> instlt(10);
+vector<int> instlt(13);
 int f, i, j, k, s, fp   /* front pointer */;
 int  bp  /* back pointer */,  gr /* grade */,  sn; /* statement number */
 int cn;  /* clause number */
@@ -83,7 +82,7 @@ void Forward::run_forward()
         cndvar[i] = "";
         //strcpy(varlt[i], "");
         varlt[i] = "";
-        instlt[0] = 0;
+        instlt[i] = 0;
     }
 
     /* enter variables which are in the IF part, 1 at a time in
@@ -587,8 +586,7 @@ void Forward::run_forward()
         complete = true;
         //changed to outer while loop for entire main, instead of these 2 checks
     }while (complete == false);
-    output_file.close();
-
+ 
 }
 
 //==========================================================================

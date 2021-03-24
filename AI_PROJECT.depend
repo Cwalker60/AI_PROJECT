@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1614805160 source:e:\git\ai_project\backward.cpp
+	<string.h>
+	<cstdlib>
+	<cstdio>
+	<vector>
+	<iostream>
+	<fstream>
+	"Backward.h"
+
+1614805160 e:\git\ai_project\backward.h
+	"Backward.h"
+
+1614805160 source:e:\git\ai_project\forward.cpp
+	<stdio.h>
+	<cstdlib>
+	<string.h>
+	<iostream>
+	<vector>
+	<fstream>
+	"Forward.h"
+
+1614805160 e:\git\ai_project\forward.h
+	"Forward.h"
+
+1614805160 source:e:\git\ai_project\main.cpp
+	<iostream>
+	<list>
+	<queue>
+	<string.h>
+	<vector>
+	"Forward.h"
+	"Backward.h"
+

@@ -1,0 +1,297 @@
+*** CONCLUSION LIST ***
+CONCLUSION #1 cancer
+CONCLUSION #2 cancer
+CONCLUSION #3 cancer
+CONCLUSION #4 cancer
+CONCLUSION #5 cancer
+CONCLUSION #6 cancer
+CONCLUSION #7 cancer
+CONCLUSION #8 cancer
+CONCLUSION #9 cancer
+CONCLUSION #10 cancer
+CONCLUSION #11 cancer
+CONCLUSION #12 cancer
+CONCLUSION #13 cancer
+CONCLUSION #14 cancer
+CONCLUSION #15 cancer
+CONCLUSION #16 cancer
+CONCLUSION #17 cancer
+CONCLUSION #18 cancer
+CONCLUSION #19 cancer
+CONCLUSION #20 cancer
+CONCLUSION #21 cancer
+CONCLUSION #22 cancer
+CONCLUSION #23 cancer
+CONCLUSION #24 cancer
+CONCLUSION #25 cancer
+CONCLUSION #26 cancer
+CONCLUSION #27 cancer
+*** VARIABLE LIST *
+VARIABLE 1	skin_issuse
+VARIABLE 2	change_skin
+VARIABLE 3	dry_skin
+VARIABLE 4	lump_breast
+VARIABLE 5	mole_change
+VARIABLE 6	persistant_cough
+VARIABLE 7	resp_infect
+VARIABLE 8	cough_blood
+VARIABLE 9	diff_swallow
+VARIABLE 10	weight_loss
+VARIABLE 11	swol_lymph
+VARIABLE 12	bone_pain
+VARIABLE 13	rectal_bleed
+VARIABLE 14	mouth_ulcer
+VARIABLE 15	abdominal_pain
+VARIABLE 16	nausea
+VARIABLE 17	headache
+VARIABLE 18	yellow_skin
+VARIABLE 19	trouble_urine
+VARIABLE 20	blood_urine
+VARIABLE 21	lower_back_pain
+** CLAUSE VARIABLES ** 
+VARIABLE1	 skin_issuse
+VARIABLE2	 change_skin
+VARIABLE3	 dry_skin
+VARIABLE4	 lump_breast
+VARIABLE5	 
+VARIABLE6	 
+VARIABLE7	 
+VARIABLE8	 
+VARIABLE9	 skin_issuse
+VARIABLE10	 change_skin
+VARIABLE11	 dry_skin
+VARIABLE12	 mole_change
+VARIABLE13	 
+VARIABLE14	 
+VARIABLE15	 
+VARIABLE16	 
+VARIABLE17	 skin_issuse
+VARIABLE18	 change_skin
+VARIABLE19	 dry_skin
+VARIABLE20	 lump_breast
+VARIABLE21	 mole_change
+VARIABLE22	 
+VARIABLE23	 
+VARIABLE24	 
+VARIABLE25	 skin_issuse
+VARIABLE26	 persistant_cough
+VARIABLE27	 resp_infect
+VARIABLE28	 cough_blood
+VARIABLE29	 
+VARIABLE30	 
+VARIABLE31	 
+VARIABLE32	 
+VARIABLE33	 skin_issuse
+VARIABLE34	 persistant_cough
+VARIABLE35	 resp_infect
+VARIABLE36	 cough_blood
+VARIABLE37	 
+VARIABLE38	 
+VARIABLE39	 
+VARIABLE40	 
+VARIABLE41	 skin_issuse
+VARIABLE42	 persistant_cough
+VARIABLE43	 resp_infect
+VARIABLE44	 cough_blood
+VARIABLE45	 diff_swallow
+VARIABLE46	 
+VARIABLE47	 
+VARIABLE48	 
+VARIABLE49	 skin_issuse
+VARIABLE50	 persistant_cough
+VARIABLE51	 resp_infect
+VARIABLE52	 cough_blood
+VARIABLE53	 diff_swallow
+VARIABLE54	 
+VARIABLE55	 
+VARIABLE56	 
+VARIABLE57	 skin_issuse
+VARIABLE58	 persistant_cough
+VARIABLE59	 weight_loss
+VARIABLE60	 swol_lymph
+VARIABLE61	 
+VARIABLE62	 
+VARIABLE63	 
+VARIABLE64	 
+VARIABLE65	 skin_issuse
+VARIABLE66	 persistant_cough
+VARIABLE67	 weight_loss
+VARIABLE68	 swol_lymph
+VARIABLE69	 bone_pain
+VARIABLE70	 rectal_bleed
+VARIABLE71	 mouth_ulcer
+VARIABLE72	 
+VARIABLE73	 skin_issuse
+VARIABLE74	 persistant_cough
+VARIABLE75	 weight_loss
+VARIABLE76	 swol_lymph
+VARIABLE77	 bone_pain
+VARIABLE78	 rectal_bleed
+VARIABLE79	 mouth_ulcer
+VARIABLE80	 
+VARIABLE81	 skin_issuse
+VARIABLE82	 persistant_cough
+VARIABLE83	 weight_loss
+VARIABLE84	 swol_lymph
+VARIABLE85	 bone_pain
+VARIABLE86	 rectal_bleed
+VARIABLE87	 abdominal_pain
+VARIABLE88	 
+VARIABLE89	 skin_issuse
+VARIABLE90	 persistant_cough
+VARIABLE91	 weight_loss
+VARIABLE92	 swol_lymph
+VARIABLE93	 bone_pain
+VARIABLE94	 rectal_bleed
+VARIABLE95	 abdominal_pain
+VARIABLE96	 
+VARIABLE97	 skin_issuse
+VARIABLE98	 persistant_cough
+VARIABLE99	 weight_loss
+VARIABLE100	 swol_lymph
+VARIABLE101	 bone_pain
+VARIABLE102	 trouble_urine
+VARIABLE103	 
+VARIABLE104	 
+VARIABLE105	 skin_issuse
+VARIABLE106	 persistant_cough
+VARIABLE107	 weight_loss
+VARIABLE108	 swol_lymph
+VARIABLE109	 bone_pain
+VARIABLE110	 trouble_urine
+VARIABLE111	 blood_urine
+VARIABLE112	 
+VARIABLE113	 skin_issuse
+VARIABLE114	 persistant_cough
+VARIABLE115	 weight_loss
+VARIABLE116	 swol_lymph
+VARIABLE117	 bone_pain
+VARIABLE118	 trouble_urine
+VARIABLE119	 blood_urine
+VARIABLE120	 lower_back_pain
+VARIABLE121	 skin_issuse
+VARIABLE122	 persistant_cough
+VARIABLE123	 weight_loss
+VARIABLE124	 swol_lymph
+VARIABLE125	 bone_pain
+VARIABLE126	 trouble_urine
+VARIABLE127	 blood_urine
+VARIABLE128	 lower_back_pain
+VARIABLE129	 skin_issuse
+VARIABLE130	 persistant_cough
+VARIABLE131	 weight_loss
+VARIABLE132	 nausea
+VARIABLE133	 bone_pain
+VARIABLE134	 rectal_bleed
+VARIABLE135	 mouth_ulcer
+VARIABLE136	 
+VARIABLE137	 skin_issuse
+VARIABLE138	 persistant_cough
+VARIABLE139	 weight_loss
+VARIABLE140	 nausea
+VARIABLE141	 bone_pain
+VARIABLE142	 rectal_bleed
+VARIABLE143	 mouth_ulcer
+VARIABLE144	 
+VARIABLE145	 skin_issuse
+VARIABLE146	 persistant_cough
+VARIABLE147	 weight_loss
+VARIABLE148	 nausea
+VARIABLE149	 bone_pain
+VARIABLE150	 rectal_bleed
+VARIABLE151	 
+VARIABLE152	 
+VARIABLE153	 skin_issuse
+VARIABLE154	 persistant_cough
+VARIABLE155	 weight_loss
+VARIABLE156	 nausea
+VARIABLE157	 bone_pain
+VARIABLE158	 rectal_bleed
+VARIABLE159	 
+VARIABLE160	 
+VARIABLE161	 skin_issuse
+VARIABLE162	 persistant_cough
+VARIABLE163	 weight_loss
+VARIABLE164	 nausea
+VARIABLE165	 bone_pain
+VARIABLE166	 trouble_urine
+VARIABLE167	 blood_urine
+VARIABLE168	 
+VARIABLE169	 skin_issuse
+VARIABLE170	 persistant_cough
+VARIABLE171	 weight_loss
+VARIABLE172	 nausea
+VARIABLE173	 bone_pain
+VARIABLE174	 trouble_urine
+VARIABLE175	 blood_urine
+VARIABLE176	 lower_back_pain
+VARIABLE177	 skin_issuse
+VARIABLE178	 persistant_cough
+VARIABLE179	 weight_loss
+VARIABLE180	 nausea
+VARIABLE181	 bone_pain
+VARIABLE182	 trouble_urine
+VARIABLE183	 blood_urine
+VARIABLE184	 lower_back_pain
+VARIABLE185	 skin_issuse
+VARIABLE186	 persistant_cough
+VARIABLE187	 weight_loss
+VARIABLE188	 nausea
+VARIABLE189	 headache
+VARIABLE190	 
+VARIABLE191	 
+VARIABLE192	 
+VARIABLE193	 skin_issuse
+VARIABLE194	 persistant_cough
+VARIABLE195	 weight_loss
+VARIABLE196	 nausea
+VARIABLE197	 headache
+VARIABLE198	 yellow_skin
+VARIABLE199	 
+VARIABLE200	 
+VARIABLE201	 skin_issuse
+VARIABLE202	 persistant_cough
+VARIABLE203	 weight_loss
+VARIABLE204	 nausea
+VARIABLE205	 headache
+VARIABLE206	 yellow_skin
+VARIABLE207	 
+VARIABLE208	 
+VARIABLE209	 
+VARIABLE210	 
+VARIABLE211	 
+VARIABLE212	 
+VARIABLE213	 
+VARIABLE214	 
+VARIABLE215	 
+VARIABLE216	 
+VARIABLE217	 
+VARIABLE218	 
+VARIABLE219	 
+VARIABLE220	 
+VARIABLE221	 
+VARIABLE222	 
+VARIABLE223	 
+VARIABLE224	 
+VARIABLE225	 
+VARIABLE226	 
+VARIABLE227	 
+VARIABLE228	 
+VARIABLE229	 
+VARIABLE230	 
+VARIABLE231	 
+VARIABLE232	 
+VARIABLE233	 
+VARIABLE234	 
+VARIABLE235	 
+VARIABLE236	 
+VARIABLE237	 
+VARIABLE238	 
+VARIABLE239	 
+
+BEGIN BACKWARD PROGRAM
+Does your skin have abnormal issues? (YES/NO) : YES
+Do you feel like your skin has changed? (YES/NO) : NO
+Do you have dry skin? (YES/NO) : NO
+Do you feel a lump in your breast? (YES/NO) : YES
+Patient is diagnosed with Breast Cancer.
